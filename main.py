@@ -9,6 +9,10 @@ st.set_page_config(page_title="📁 Data Sweeper",layout="wide")
 st.title("📁 Data Sweeper")
 st.write("Convert your files into CSV or Excel formats with built-in data cleaning and visualization")
 
+#Say Hi!
+with st.chat_message("assistant"):
+    st.write("Hello 👋")
+
 #Upload func
 uploaded_files = st.file_uploader("Upload files here (CSV / xlsx):",type=["csv","xlxs"],accept_multiple_files=True)
 
@@ -24,17 +28,25 @@ if uploaded_files:
             st.error(f"Unsupported file type: {file_ext}")
             continue
         
-        #Display file's information
-        st.write(f"File Name: {file.name}")
-        st.write(f"File Size: {file.size//1024}")
-        
+        #Chat
+        with st.chat_message("assistant"):
+            #Display file's information
+            st.write(f"Your 📁 File Name is '{file.name}' and Your 📂 File Size is '{file.size/1024}'")
+           
         #Show some rows of our data-frame
         st.write("Preview the Head of Data-frame")
-        st.dataframe(df.head())
+        st.dataframe(df.head(n=10))
         
         #Data cleaning options
         st.subheader("Data Cleaning Opts")
-        if st.checkbox(f"clean Data for {file.name}"):
+        with st.chat_message("assistant"):
+            opt = st.selectbox(
+                "Do want to clean this file?",
+                ("yes","no"),
+                index=None,
+                placeholder="Select..."
+            )
+        if opt == "yes":
             col1, col2 = st.columns(2)
             
             with col1:
@@ -47,7 +59,9 @@ if uploaded_files:
                     numeric_cols = df.select_dtypes(include=("number")).columns
                     df[numeric_cols] = df[numeric_cols].fillna(df[numeric_cols].mean())
                     st.write("Missing Values have been Filled!")
-                
+        elif opt == "no":
+            st.warning("Ok its your choice!!")
+               
         #Choose specific Columns to Convert or Keep
         st.subheader("Select Columns to Convert!")    
         columns = st.multiselect(f"Choose Columns for {file.name}", df.columns, default=df.columns)
@@ -56,7 +70,7 @@ if uploaded_files:
         #Visualization
         st.subheader(f"Data Visualization for {file.name}")
         if st.checkbox(f"Show Visualization for {file.name}"):
-            st.bar_chart(df.select_dtypes(include='number').iloc[:,:2])
+            st.line_chart(df.select_dtypes(include='number'))
         
         #Convert the file 
         st.subheader("Conversion Opts")
