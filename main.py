@@ -14,7 +14,7 @@ with st.chat_message("assistant"):
     st.write("Hello 👋")
 
 #Upload func
-uploaded_files = st.file_uploader("Upload files here (CSV / XLSX):",type=["csv","xlxs"],accept_multiple_files=True)
+uploaded_files = st.file_uploader("Upload files here (CSV / XLSX):",type=["csv","xlsx"],accept_multiple_files=True)
 
 if uploaded_files:
     for file in uploaded_files:
