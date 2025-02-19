@@ -12,7 +12,7 @@ st.write("Convert your files into CSV or Excel formats with built-in data cleani
 #Say Hi!
 with st.chat_message("assistant"):
     st.write("Hello 👋")
-    st.snow()
+    
 
 #Upload func
 uploaded_files = st.file_uploader("Upload files here (CSV / XLSX):",type=["csv","xlsx"],accept_multiple_files=True)
