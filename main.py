@@ -14,7 +14,7 @@ with st.chat_message("assistant"):
     st.write("Hello 👋")
 
 #Upload func
-uploaded_files = st.file_uploader("Upload files here (CSV / xlsx):",type=["csv","xlxs"],accept_multiple_files=True)
+uploaded_files = st.file_uploader("Upload files here (CSV / XLSX):",type=["csv","xlxs"],accept_multiple_files=True)
 
 if uploaded_files:
     for file in uploaded_files:
@@ -35,7 +35,7 @@ if uploaded_files:
            
         #Show some rows of our data-frame
         st.write("Preview the Head of Data-frame")
-        st.dataframe(df.head(n=10))
+        st.dataframe(df.head(n=8))
         
         #Data cleaning options
         st.subheader("Data Cleaning Opts")
