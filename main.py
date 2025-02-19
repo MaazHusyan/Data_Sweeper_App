@@ -29,7 +29,7 @@ if uploaded_files:
             st.error(f"Unsupported file type: {file_ext}")
             continue
         
-        #Chat
+        #File Info
         with st.chat_message("assistant"):
             #Display file's information
             st.write(f"Your 📁 File Name is '{file.name}' and Your 📂 File Size is '{file.size/1024}'")
@@ -75,13 +75,18 @@ if uploaded_files:
         
         #Convert the file 
         st.subheader("Conversion Opts")
-        conversion_type = st.radio(f"Convert {file.name} to:",["CSV","Excel"],key=file.name)
+        conversion_type = st.radio(f"Convert {file.name} to:",["CSV","Excel","json"],key=file.name)
         if st.button(f"Convert {file.name}"):
             buffer = BytesIO()
             if conversion_type == "CSV":
                 df.to_csv(buffer, index=False)
                 file_name = file.name.replace(file_ext, ".csv")
                 mime_type = "text/csv"
+                
+            elif conversion_type == "json":
+                buffer.write(df.to_json(orient="records").encode())
+                file_name = file.name.replace(file_ext, ".json")
+                mime_type = "application/json"
                 
             elif conversion_type == "Excel":
                 df.to_excel(buffer, index=False, engine="openpyxl")
