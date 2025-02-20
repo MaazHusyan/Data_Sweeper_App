@@ -75,7 +75,7 @@ if uploaded_files:
         
         #Convert the file 
         st.subheader("Conversion Opts")
-        conversion_type = st.radio(f"Convert {file.name} to:",["CSV","Excel","json"],key=file.name)
+        conversion_type = st.radio(f"Convert {file.name} to:",["CSV","Excel","Json"],key=file.name)
         if st.button(f"Convert {file.name}"):
             buffer = BytesIO()
             if conversion_type == "CSV":
@@ -83,7 +83,7 @@ if uploaded_files:
                 file_name = file.name.replace(file_ext, ".csv")
                 mime_type = "text/csv"
                 
-            elif conversion_type == "json":
+            elif conversion_type == "Json":
                 buffer.write(df.to_json(orient="records").encode())
                 file_name = file.name.replace(file_ext, ".json")
                 mime_type = "application/json"
