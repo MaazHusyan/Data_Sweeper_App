@@ -19,15 +19,13 @@ with st.chat_message("assistant"):
 st.subheader("Select a demo dataset")
 demo_dataset = st.selectbox(
     "Choose a demo dataset",
-    ("None", "Iris", "Diamonds", "Titanic", "Tips"),
+    ("None", "Iris",  "Titanic", "Tips"),
     index=0
 )
 
 if demo_dataset != "None":
     if demo_dataset == "Iris":
         df = sns.load_dataset("iris")
-    elif demo_dataset == "Diamonds":
-        df = sns.load_dataset("diamonds")
     elif demo_dataset == "Titanic":
         df = sns.load_dataset("titanic")
     elif demo_dataset == "Tips":
