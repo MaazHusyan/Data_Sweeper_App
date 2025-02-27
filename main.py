@@ -131,9 +131,19 @@ if uploaded_files:
             #Display file's information
             st.write(f"Your 📁 File Name is '{file.name}' and Your 📂 File Size is '{file.size/1024}'")
            
-        #Show some rows of our data-frame
-        st.write("Preview the Head of Data-frame")
-        st.dataframe(df)
+        # Display file's information
+    st.subheader(f"Some Information about {file.name}")
+    with st.chat_message("assistant"):
+        st.write(f"Loaded demo dataset: {file.name}")
+        # Display the rows & columns of Data
+        st.write("Total Rows: ",df.shape[0])
+        st.write("Total Columns: ",df.shape[1])
+        # Fieelds of Data
+        st.write(df)
+        
+        # Display colunms name and selected data types
+        st.write("Column Nmaes and Data Types", df.dtypes)
+    
         
         #Data cleaning options
         st.subheader("Data Cleaning Opts")
