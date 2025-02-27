@@ -132,14 +132,14 @@ if uploaded_files:
             st.write(f"Your 📁 File Name is '{file.name}' and Your 📂 File Size is '{file.size/1024}'")
            
         # Display file's information
-    st.subheader(f"Some Information about {file.name}")
-    with st.chat_message("assistant"):
-        st.write(f"Loaded demo dataset: {file.name}")
+        st.subheader(f"Some Information about {file.name}")
+        with st.chat_message("assistant"):
+            st.write(f"Loaded demo dataset: {file.name}")
         # Display the rows & columns of Data
-        st.write("Total Rows: ",df.shape[0])
-        st.write("Total Columns: ",df.shape[1])
+            st.write("Total Rows: ",df.shape[0])
+            st.write("Total Columns: ",df.shape[1])
         # Fieelds of Data
-        st.write(df)
+            st.write(df)
         
         # Display colunms name and selected data types
         st.write("Column Nmaes and Data Types", df.dtypes)
